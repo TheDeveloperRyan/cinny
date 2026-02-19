@@ -3,6 +3,17 @@ import { atom } from 'jotai';
 const STORAGE_KEY = 'settings';
 export type DateFormat = 'D MMM YYYY' | 'DD/MM/YYYY' | 'MM/DD/YYYY' | 'YYYY/MM/DD' | '';
 export type MessageSpacing = '0' | '100' | '200' | '300' | '400' | '500';
+export type KeyBinds = {
+  NavigateSpaceUp: Array<string>;
+  NavigateSpaceDown: Array<string>;
+  NavigateRoomUp: Array<string>;
+  NavigateRoomDown: Array<string>;
+  TimelineHighlightUp: Array<string>;
+  TimelineHighlightDown: Array<string>;
+  TimelineHighlightReply: Array<string>;
+  TimelineHighlightReact: Array<string>;
+  TimelineHighlightDelete: Array<string>;
+};
 export enum MessageLayout {
   Modern = 0,
   Compact = 1,
@@ -41,9 +52,11 @@ export interface Settings {
   dateFormatString: string;
 
   developerTools: boolean;
+
+  keybinds: KeyBinds;
 }
 
-const defaultSettings: Settings = {
+export const defaultSettings: Settings = {
   themeId: undefined,
   useSystemTheme: true,
   lightThemeId: undefined,
@@ -75,6 +88,18 @@ const defaultSettings: Settings = {
   dateFormatString: 'D MMM YYYY',
 
   developerTools: false,
+
+  keybinds: {
+    NavigateSpaceUp: ['Ctrl', 'Alt', 'ArrowUp'],
+    NavigateSpaceDown: ['Ctrl', 'Alt', 'ArrowDown'],
+    NavigateRoomUp: ['Alt', 'ArrowUp'],
+    NavigateRoomDown: ['Alt', 'ArrowDown'],
+    TimelineHighlightUp: ['ArrowUp'],
+    TimelineHighlightDown: ['ArrowDown'],
+    TimelineHighlightDelete: ['Delete'],
+    TimelineHighlightReply: ['R'],
+    TimelineHighlightReact: ['+'],
+  },
 };
 
 export const getSettings = () => {
